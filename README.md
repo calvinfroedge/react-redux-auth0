@@ -4,7 +4,7 @@
 import { AuthComponents, AuthMiddleware, AuthReducer } from 'react-redux-auth0'
 ```
 
-## When starting your app, include the following environment variables:
+### When starting your app, include the following environment variables:
 
 ```
 AUTH0_CLIENTID=client-id-string AUTH0_DOMAIN=domain npm your-start-command
