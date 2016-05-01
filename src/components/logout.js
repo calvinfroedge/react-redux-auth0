@@ -10,7 +10,7 @@ class Logout extends React.Component {
 
   logout(){
     let { dispatch } = this.props;
-    dispatch(act(auth.logout()));
+    dispatch(act(auth.logout)());
   }
 
   render(){
