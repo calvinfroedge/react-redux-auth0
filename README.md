@@ -10,7 +10,7 @@ import { AuthComponents, AuthMiddleware, AuthReducer } from 'react-redux-auth0'
 AUTH0_CLIENTID=client-id-string AUTH0_DOMAIN=domain npm your-start-command
 ```
 
-Include Auth0 from CDN in your template (believe me, you don't want to build it):
+Include [Auth0](https://auth0.com/) from CDN in your template (believe me, you don't want to build it):
 
 ```
 <script src="http://cdn.auth0.com/js/lock-9.0.min.js"></script>
