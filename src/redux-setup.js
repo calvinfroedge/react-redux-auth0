@@ -25,9 +25,21 @@ const DevTools = createDevTools(
 )
 
 //Create the store
-import AuthMiddleware from './middleware'
+import * as AuthMiddlewares from './middlewares'
+import { auth } from './constants'
+
 const finalCreateStore = compose(
-  applyMiddleware(AuthMiddleware),
+  applyMiddleware(
+    AuthMiddlewares.TokenMiddleware(),
+    AuthMiddlewares.AuthMiddlewareHook([
+      {
+        type: auth.signin,
+        func: (payload, authState, dispatch)=>{
+          console.log("I was called on signin!", payload, authState, dispatch);
+        }
+      }
+    ])
+  ),
   DevTools.instrument()
 )(createStore);
 
