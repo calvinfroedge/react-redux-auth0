@@ -34,8 +34,8 @@ const finalCreateStore = compose(
     AuthMiddlewares.AuthMiddlewareHook([
       {
         type: auth.signin,
-        func: (payload, authState, dispatch)=>{
-          console.log("I was called on signin!", payload, authState, dispatch);
+        func: (payload, state, dispatch)=>{
+          console.log("I was called on signin!", payload, state, dispatch);
         }
       }
     ])

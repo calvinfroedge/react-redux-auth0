@@ -16,7 +16,7 @@ export default (eventList=[])=>{
     eventList.forEach((e)=>{
       const { type, func } = e;
       if(action.type == type){
-        func(action.payload, store.getState().auth, store.dispatch);
+        func(action.payload, store.getState(), store.dispatch);
       }
     });
 
