@@ -32,7 +32,7 @@ class LoginSignup extends React.Component {
           }
 
           const method = this.props.signup ? 'signUp' : 'login';
-          this.finish(method, err, profile, authResult.idToken);
+          this.finish(method, error, profile, authResult.idToken);
           if (this.props.onAuthenticated) {
             this.props.onAuthenticated(authResult, profile);
           }
@@ -44,12 +44,14 @@ class LoginSignup extends React.Component {
   }
 
   showLoginModal = (event) => {
+    event.preventDefault();
     this.lock.show({
       initialScreen: 'login'
     });
   };
 
   showSignupModal = (event) => {
+    event.preventDefault();
     this.lock.show({
       initialScreen: 'signIn'
     });
