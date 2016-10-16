@@ -56,11 +56,11 @@ Example:
 // --> <a href="/login" onClick="..." ...>Sign in</a>
 ```
 
- - title: element
+ - children: element
  > Link value
 Example: 
 ```js
-<LoginSignup login title="My custom login" />
+<LoginSignup login>My custom login</LoginSignup>
 // --> <a ...>My custom login</a>
 ```
 

@@ -62,15 +62,15 @@ class LoginSignup extends React.Component {
   }
 
   render(){
-    let props, { title, href } = this.props;
+    let props, { children, href } = this.props;
 
     return (
       <div className="login-signup">
         {
-          props.signup ? null : <SignUpButton href={href} onClick={::this.showSignupModal}>{title}</SignUpButton>
+          props.signup ? null : <SignUpButton href={href} onClick={::this.showSignupModal}>{children}</SignUpButton>
         }
         {
-          props.login ? null : <LoginButton href={href} onClick={::this.showLoginModal}>{title}</LoginButton>
+          props.login ? null : <LoginButton href={href} onClick={::this.showLoginModal}>{children}</LoginButton>
         }
       </div>
     );
@@ -80,7 +80,7 @@ class LoginSignup extends React.Component {
 LoginSignup.propTypes = {
   signup: PropTypes.bool,
   signin: PropTypes.bool,
-  title: PropTypes.string,
+  children: PropTypes.element,
   href: PropTypes.string,
 };
 

@@ -104,7 +104,7 @@ var LoginSignup = function (_React$Component) {
     key: 'render',
     value: function render() {
       var props = void 0;var _props = this.props;
-      var title = _props.title;
+      var children = _props.children;
       var href = _props.href;
 
 
@@ -114,12 +114,12 @@ var LoginSignup = function (_React$Component) {
         props.signup ? null : _react2.default.createElement(
           _SignUpButton2.default,
           { href: href, onClick: this.showSignupModal.bind(this) },
-          title
+          children
         ),
         props.login ? null : _react2.default.createElement(
           _LoginButton2.default,
           { href: href, onClick: this.showLoginModal.bind(this) },
-          title
+          children
         )
       );
     }
@@ -131,7 +131,7 @@ var LoginSignup = function (_React$Component) {
 LoginSignup.propTypes = {
   signup: _react.PropTypes.bool,
   signin: _react.PropTypes.bool,
-  title: _react.PropTypes.string,
+  children: _react.PropTypes.element,
   href: _react.PropTypes.string
 };
 
