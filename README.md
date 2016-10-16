@@ -73,7 +73,39 @@ Example:
 
 ## Logout
 
-A simple logout button.
+A simple logout link.
+
+```js
+const { Logout } = AuthComponents;
++
++<Logout />
+```
+
+### Optional parameters
+
+ - href: String
+ > Specify the href attribute of the link to support disabled JavaScript (the user will be redirected to this url after clicking the button if he has disabled JavaScript). 
+Example: 
+```js
+<Logout href="/logout" />
+// --> <a href="/logout" onClick="..." ...>Logout</a>
+```
+
+ - children: element
+ > Link value
+Example: 
+```js
+<Logout>Logout before its too late!</Logout>
+// --> <a ...>Logout before its too late!</a>
+```
+
+ - onAuthenticated: function
+ > Function which is called after a successful logout
+Example: 
+```js
+<Logout onLogout={() => null}>My custom logout</Logout>
+```
+
 
 # Examples
 

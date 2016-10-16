@@ -53,7 +53,7 @@ class LoginSignup extends React.Component {
   showSignupModal = (event) => {
     event.preventDefault();
     this.lock.show({
-      initialScreen: 'signIn'
+      initialScreen: 'signUp'
     });
   };
 

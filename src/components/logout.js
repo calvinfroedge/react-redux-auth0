@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { createAction as act } from 'redux-actions'
 import { connect } from 'react-redux'
 import { auth } from '../constants'
@@ -9,18 +9,32 @@ class Logout extends React.Component {
   }
 
   logout(){
-    let { dispatch } = this.props;
+    let { dispatch, onLogout } = this.props;
     dispatch(act(auth.logout)());
+    if (onLogout) {
+      onLogout();
+    }
   }
 
   render(){
     return (
       <div className="logout">
-        <a href="#" onClick={::this.logout} className="logout">Logout</a>
+        <a href={href} onClick={::this.logout} className="logout">Logout</a>
       </div>
     );
   }
 }
+
+Logout.propTypes = {
+  href: PropTypes.string,
+  children: PropTypes.element,
+  onLogout: PropTypes.func,
+};
+
+Logout.defaultProps = {
+  children: 'Logout',
+  href: '#',
+};
 
 export default connect((state)=>{
   let { auth } = state;
