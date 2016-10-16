@@ -13,30 +13,39 @@ class LoginSignup extends React.Component {
     if(props.signup && props.login) throw new Error('You may only pass "signup" or "login".');
   }
 
-  hide(){
-    this.lock.hide();
-  }
-
   componentDidMount(){
     const options = this.props.options;
     try {
       this.lock = new Auth0Lock(process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID', process.env.AUTH0_DOMAIN || 'Set process.env.AUTH0_DOMAIN', options);
+
+      this.lock.on('authenticated', (authResult) => {
+        lock.getProfile(authResult.idToken, function(error, profile) {
+          if (error) {
+            // Handle error
+            console.error(error);
+            return;
+          }
+
+          if (this.props.onAuthenticated) {
+            this.props.onAuthenticated(authResult, profile);
+          }
+        });
+      });
     } catch(e){
       console.log('auth0 mount error', e);
     }
   }
 
-  show(event, fn, cb){
-    event.preventDefault();
-    this.lock[fn](cb);
-  }
-
   showLoginModal = (event) => {
-    this.show(event, 'showSignin', this.finish.bind(this, 'signin'));
+    this.lock.show({
+      initialScreen: 'login'
+    });
   };
 
   showSignupModal = (event) => {
-    this.show(event, 'showSignup', this.finish.bind(this, 'signup'));
+    this.lock.show({
+      initialScreen: 'signIn'
+    });
   };
 
   finish(method, err, profile, token){

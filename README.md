@@ -64,6 +64,13 @@ Example:
 // --> <a ...>My custom login</a>
 ```
 
+ - onAuthenticated: function
+ > Function which is called after a successful login
+Example: 
+```js
+<LoginSignup onAuthenticated={(authResult, profile) => null}>My custom login</LoginSignup>
+```
+
 ## Logout
 
 A simple logout button.
