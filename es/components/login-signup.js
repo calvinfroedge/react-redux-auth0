@@ -41,12 +41,14 @@ var LoginSignup = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (LoginSignup.__proto__ || Object.getPrototypeOf(LoginSignup)).call(this, props));
 
     _this.showLoginModal = function (event) {
+      event.preventDefault();
       _this.lock.show({
         initialScreen: 'login'
       });
     };
 
     _this.showSignupModal = function (event) {
+      event.preventDefault();
       _this.lock.show({
         initialScreen: 'signIn'
       });
@@ -75,7 +77,7 @@ var LoginSignup = function (_React$Component) {
             }
 
             var method = _this2.props.signup ? 'signUp' : 'login';
-            _this2.finish(method, err, profile, authResult.idToken);
+            _this2.finish(method, error, profile, authResult.idToken);
             if (_this2.props.onAuthenticated) {
               _this2.props.onAuthenticated(authResult, profile);
             }
