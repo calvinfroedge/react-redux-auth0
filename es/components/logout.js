@@ -35,7 +35,9 @@ var Logout = function (_React$Component) {
 
   _createClass(Logout, [{
     key: 'logout',
-    value: function logout() {
+    value: function logout(event) {
+      event.preventDefault();
+
       var _props = this.props;
       var dispatch = _props.dispatch;
       var onLogout = _props.onLogout;
