@@ -16,10 +16,15 @@ class LoginSignup extends React.Component {
   componentDidMount(){
     const options = this.props.options;
     try {
-      this.lock = new Auth0Lock(process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID', process.env.AUTH0_DOMAIN || 'Set process.env.AUTH0_DOMAIN', options);
+      const lock = new Auth0Lock(
+          process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID',
+          process.env.AUTH0_DOMAIN || 'Set process.env.AUTH0_DOMAIN',
+          options
+      );
+      this.lock = lock;
 
-      this.lock.on('authenticated', (authResult) => {
-        lock.getProfile(authResult.idToken, function(error, profile) {
+      lock.on('authenticated', (authResult) => {
+        this.lock.getProfile(authResult.idToken, (error, profile) => {
           if (error) {
             // Handle error
             console.error(error);
@@ -95,6 +100,7 @@ LoginSignup.propTypes = {
   signin: PropTypes.bool,
   children: PropTypes.element,
   href: PropTypes.string,
+  onAuthenticated: PropTypes.func,
   options: PropTypes.object,
 };
 
