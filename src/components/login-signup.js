@@ -62,7 +62,8 @@ class LoginSignup extends React.Component {
   }
 
   render(){
-    let props, { children, href } = this.props;
+    let { props } = this;
+    let { href, children } = props;
 
     return (
       <div className="login-signup">
