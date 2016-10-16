@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { auth } from '../constants'
 import { createAction as act } from 'redux-actions'
 import { connect } from 'react-redux'
+
+import LoginButton from './helper/LoginButton';
+import SignUpButton from './helper/SignUpButton';
 
 class LoginSignup extends React.Component {
   constructor(props){
@@ -10,30 +13,49 @@ class LoginSignup extends React.Component {
     if(props.signup && props.login) throw new Error('You may only pass "signup" or "login".');
   }
 
-  hide(){
-    this.lock.hide();
-  }
-
   componentDidMount(){
+    const options = this.props.options;
     try {
-      this.lock = new Auth0Lock(process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID', process.env.AUTH0_DOMAIN, 'Set process.env.AUTH0_DOMAIN');
+      const lock = new Auth0Lock(
+          process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID',
+          process.env.AUTH0_DOMAIN || 'Set process.env.AUTH0_DOMAIN',
+          options
+      );
+      this.lock = lock;
+
+      lock.on('authenticated', (authResult) => {
+        this.lock.getProfile(authResult.idToken, (error, profile) => {
+          if (error) {
+            // Handle error
+            console.error(error);
+            return;
+          }
+
+          const method = this.props.signup ? 'signup' : 'login';
+          this.finish(method, error, profile, authResult.idToken);
+          if (this.props.onAuthenticated) {
+            this.props.onAuthenticated(authResult, profile);
+          }
+        });
+      });
     } catch(e){
       console.log('auth0 mount error', e);
     }
   }
 
-  show(event, fn, cb){
+  showLoginModal = (event) => {
     event.preventDefault();
-    this.lock[fn](cb);
-  }
+    this.lock.show({
+      initialScreen: 'login'
+    });
+  };
 
-  showLoginModal(event){
-    this.show(event, 'showSignin', this.finish.bind(this, 'signin'));
-  }
-
-  showSignupModal(event){
-    this.show(event, 'showSignup', this.finish.bind(this, 'signup'));
-  }
+  showSignupModal = (event) => {
+    event.preventDefault();
+    this.lock.show({
+      initialScreen: 'signUp'
+    });
+  };
 
   finish(method, err, profile, token){
     let { props } = this;
@@ -41,7 +63,7 @@ class LoginSignup extends React.Component {
     let obj;
     let newUser = false;
 
-    if(method == 'signin'){ //These both do the same thing now, but that may not be the case later
+    if(method == 'login'){ //These both do the same thing now, but that may not be the case later
       action = act(auth.signin);
     } else if(method == 'signup'){
       action = act(auth.signin);
@@ -60,23 +82,29 @@ class LoginSignup extends React.Component {
 
   render(){
     let { props } = this;
+    let { href, children } = props;
 
     return (
       <div className="login-signup">
         {
-          props.signup ? '' : <div className="login">
-            <a href="#" className="btn btn-default" onClick={::this.showLoginModal}>Login</a>
-          </div>
+          props.login ? null : <SignUpButton href={href} onClick={this.showSignupModal}>{children}</SignUpButton>
         }
         {
-          props.login ? '' : <div className="signup">
-            <a href="#" className="btn btn-default" onClick={::this.showSignupModal}>Signup</a>
-          </div>
+          props.signup ? null : <LoginButton href={href} onClick={this.showLoginModal}>{children}</LoginButton>
         }
       </div>
     );
   }
 }
+
+LoginSignup.propTypes = {
+  signup: PropTypes.bool,
+  signin: PropTypes.bool,
+  children: PropTypes.element,
+  href: PropTypes.string,
+  onAuthenticated: PropTypes.func,
+  options: PropTypes.object,
+};
 
 export default connect((state)=>{
   let { auth } = state;

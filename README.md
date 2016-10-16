@@ -13,7 +13,7 @@ AUTH0_CLIENTID=client-id-string AUTH0_DOMAIN=domain npm your-start-command
 Include [Auth0](https://auth0.com/) from CDN in your template (believe me, you don't want to build it):
 
 ```
-<script src="http://cdn.auth0.com/js/lock-9.0.min.js"></script>
+<script src="http://cdn.auth0.com/js/lock/10.4.0/lock.min.js"></script>
 ```
 
 Make sure you have this webpack plugin so that webpack will compile in proper environment variables:
@@ -46,9 +46,73 @@ Can be used to render either a 'Sigup' or 'Login' button:
 <LoginSignup signup />
 ```
 
+### Optional parameters
+
+ - href: String
+ > Specify the href attribute of the link to support disabled JavaScript (the user will be redirected to this url after clicking the button if he has disabled JavaScript). 
+Example: 
+```js
+<LoginSignup login href="/login" />
+// --> <a href="/login" onClick="..." ...>Sign in</a>
+```
+
+ - children: element
+ > Link value
+Example: 
+```js
+<LoginSignup login>My custom login</LoginSignup>
+// --> <a ...>My custom login</a>
+```
+
+ - onAuthenticated: function
+ > Function which is called after a successful login
+Example: 
+```js
+<LoginSignup onAuthenticated={(authResult, profile) => null}>My custom login</LoginSignup>
+```
+
+ - options: Object
+ > Object, which can customize the Auth0 settings (see https://github.com/auth0/lock#customization). 
+Example: 
+```js
+<LoginSignup options={{ language: 'fr' }}>My custom login</LoginSignup>
+```
+
 ## Logout
 
-A simple logout button.
+A simple logout link.
+
+```js
+const { Logout } = AuthComponents;
++
++<Logout />
+```
+
+### Optional parameters
+
+ - href: String
+ > Specify the href attribute of the link to support disabled JavaScript (the user will be redirected to this url after clicking the button if he has disabled JavaScript). 
+Example: 
+```js
+<Logout href="/logout" />
+// --> <a href="/logout" onClick="..." ...>Logout</a>
+```
+
+ - children: element
+ > Link value
+Example: 
+```js
+<Logout>Logout before its too late!</Logout>
+// --> <a ...>Logout before its too late!</a>
+```
+
+ - onAuthenticated: function
+ > Function which is called after a successful logout
+Example: 
+```js
+<Logout onLogout={() => null}>My custom logout</Logout>
+```
+
 
 # Examples
 
