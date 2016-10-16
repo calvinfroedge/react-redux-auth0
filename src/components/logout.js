@@ -9,7 +9,7 @@ class Logout extends React.Component {
   }
 
   logout(){
-    let { dispatch, onLogout, href, children } = this.props;
+    let { dispatch, onLogout } = this.props;
     dispatch(act(auth.logout)());
     if (onLogout) {
       onLogout();
@@ -17,6 +17,8 @@ class Logout extends React.Component {
   }
 
   render(){
+    const { href, children } = this.props;
+
     return (
       <div className="logout">
         <a href={href} onClick={::this.logout} className="logout">{children}</a>
