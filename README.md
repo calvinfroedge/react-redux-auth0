@@ -40,15 +40,26 @@ const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
 
 Can be used to render either a 'Sigup' or 'Login' button:
 
+
 ```
+const { LoginSignup } = AuthComponents;
+
 <LoginSignup login />
 
 <LoginSignup signup />
+
 ```
 
 ## Logout
 
-A simple logout button.
+A simple logout link.
+
+```
+const { Logout } = AuthComponents;
+
+<Logout />
+
+```
 
 # Examples
 
