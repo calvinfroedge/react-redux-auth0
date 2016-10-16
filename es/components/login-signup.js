@@ -76,7 +76,7 @@ var LoginSignup = function (_React$Component) {
               return;
             }
 
-            var method = _this2.props.signup ? 'signUp' : 'login';
+            var method = _this2.props.signup ? 'signup' : 'login';
             _this2.finish(method, error, profile, authResult.idToken);
             if (_this2.props.onAuthenticated) {
               _this2.props.onAuthenticated(authResult, profile);

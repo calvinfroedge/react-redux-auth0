@@ -31,7 +31,7 @@ class LoginSignup extends React.Component {
             return;
           }
 
-          const method = this.props.signup ? 'signUp' : 'login';
+          const method = this.props.signup ? 'signup' : 'login';
           this.finish(method, error, profile, authResult.idToken);
           if (this.props.onAuthenticated) {
             this.props.onAuthenticated(authResult, profile);
