@@ -39,6 +39,8 @@ var Logout = function (_React$Component) {
       var _props = this.props;
       var dispatch = _props.dispatch;
       var onLogout = _props.onLogout;
+      var href = _props.href;
+      var children = _props.children;
 
       dispatch((0, _reduxActions.createAction)(_constants.auth.logout)());
       if (onLogout) {
@@ -54,7 +56,7 @@ var Logout = function (_React$Component) {
         _react2.default.createElement(
           'a',
           { href: href, onClick: this.logout.bind(this), className: 'logout' },
-          'Logout'
+          children
         )
       );
     }
