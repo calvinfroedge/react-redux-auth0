@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { auth } from '../constants'
 import { createAction as act } from 'redux-actions'
 import { connect } from 'react-redux'
+
+import LoginButton from './helper/LoginButton';
+import SignUpButton from './helper/SignUpButton';
 
 class LoginSignup extends React.Component {
   constructor(props){
@@ -59,24 +62,27 @@ class LoginSignup extends React.Component {
   }
 
   render(){
-    let { props } = this;
+    let props, { title, href } = this.props;
 
     return (
       <div className="login-signup">
         {
-          props.signup ? '' : <div className="login">
-            <a href="#" className="btn btn-default" onClick={::this.showLoginModal}>Login</a>
-          </div>
+          props.signup ? null : <SignUpButton href={href} onClick={::this.showSignupModal}>{title}</SignUpButton>
         }
         {
-          props.login ? '' : <div className="signup">
-            <a href="#" className="btn btn-default" onClick={::this.showSignupModal}>Signup</a>
-          </div>
+          props.login ? null : <LoginButton href={href} onClick={::this.showLoginModal}>{title}</LoginButton>
         }
       </div>
     );
   }
 }
+
+LoginSignup.propTypes = {
+  signup: PropTypes.bool,
+  signin: PropTypes.bool,
+  title: PropTypes.string,
+  href: PropTypes.string,
+};
 
 export default connect((state)=>{
   let { auth } = state;

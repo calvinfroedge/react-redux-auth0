@@ -46,6 +46,24 @@ Can be used to render either a 'Sigup' or 'Login' button:
 <LoginSignup signup />
 ```
 
+### Optional parameters
+
+ - href: String
+ > Specify the href attribute of the link to support disabled JavaScript (the user will be redirected to this url after clicking the button if he has disabled JavaScript). 
+Example: 
+```js
+<LoginSignup login href="/login" />
+// --> <a href="/login" onClick="..." ...>Sign in</a>
+```
+
+ - title: element
+ > Link value
+Example: 
+```js
+<LoginSignup login title="My custom login" />
+// --> <a ...>My custom login</a>
+```
+
 ## Logout
 
 A simple logout button.
