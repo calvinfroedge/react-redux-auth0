@@ -100,7 +100,7 @@ var LoginSignup = function (_React$Component) {
         //These both do the same thing now, but that may not be the case later
         action = (0, _reduxActions.createAction)(_constants.auth.signin);
       } else if (method == 'signup') {
-        action = (0, _reduxActions.createAction)(_constants.auth.signup);
+        action = (0, _reduxActions.createAction)(_constants.auth.signin);
         newUser = true;
       }
 

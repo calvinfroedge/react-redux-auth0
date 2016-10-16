@@ -1,6 +1,6 @@
 {
   "name": "react-redux-auth0",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "React / redux / auth0",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
