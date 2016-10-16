@@ -103,9 +103,9 @@ var LoginSignup = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var props = void 0;var _props = this.props;
-      var children = _props.children;
-      var href = _props.href;
+      var props = this.props;
+      var href = props.href;
+      var children = props.children;
 
 
       return _react2.default.createElement(
