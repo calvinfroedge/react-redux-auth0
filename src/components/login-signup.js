@@ -18,8 +18,9 @@ class LoginSignup extends React.Component {
   }
 
   componentDidMount(){
+    const options = this.props.options;
     try {
-      this.lock = new Auth0Lock(process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID', process.env.AUTH0_DOMAIN, 'Set process.env.AUTH0_DOMAIN');
+      this.lock = new Auth0Lock(process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID', process.env.AUTH0_DOMAIN || 'Set process.env.AUTH0_DOMAIN', options);
     } catch(e){
       console.log('auth0 mount error', e);
     }
@@ -30,13 +31,13 @@ class LoginSignup extends React.Component {
     this.lock[fn](cb);
   }
 
-  showLoginModal(event){
+  showLoginModal = (event) => {
     this.show(event, 'showSignin', this.finish.bind(this, 'signin'));
-  }
+  };
 
-  showSignupModal(event){
+  showSignupModal = (event) => {
     this.show(event, 'showSignup', this.finish.bind(this, 'signup'));
-  }
+  };
 
   finish(method, err, profile, token){
     let { props } = this;
@@ -68,10 +69,10 @@ class LoginSignup extends React.Component {
     return (
       <div className="login-signup">
         {
-          props.signup ? null : <SignUpButton href={href} onClick={::this.showSignupModal}>{children}</SignUpButton>
+          props.login ? null : <SignUpButton href={href} onClick={this.showSignupModal}>{children}</SignUpButton>
         }
         {
-          props.login ? null : <LoginButton href={href} onClick={::this.showLoginModal}>{children}</LoginButton>
+          props.signup ? null : <LoginButton href={href} onClick={this.showLoginModal}>{children}</LoginButton>
         }
       </div>
     );
@@ -83,6 +84,7 @@ LoginSignup.propTypes = {
   signin: PropTypes.bool,
   children: PropTypes.element,
   href: PropTypes.string,
+  options: PropTypes.object,
 };
 
 export default connect((state)=>{
