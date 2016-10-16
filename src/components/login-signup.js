@@ -66,7 +66,7 @@ class LoginSignup extends React.Component {
     if(method == 'login'){ //These both do the same thing now, but that may not be the case later
       action = act(auth.signin);
     } else if(method == 'signup'){
-      action = act(auth.signin);
+      action = act(auth.signup);
       newUser = true;
     }
 
