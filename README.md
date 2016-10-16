@@ -71,6 +71,13 @@ Example:
 <LoginSignup onAuthenticated={(authResult, profile) => null}>My custom login</LoginSignup>
 ```
 
+ - options: Object
+ > Object, which can customize the Auth0 settings (see https://github.com/auth0/lock#customization). 
+Example: 
+```js
+<LoginSignup options={{ language: 'fr' }}>My custom login</LoginSignup>
+```
+
 ## Logout
 
 A simple logout link.
