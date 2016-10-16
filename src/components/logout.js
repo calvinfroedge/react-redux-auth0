@@ -8,7 +8,9 @@ class Logout extends React.Component {
     super(props);
   }
 
-  logout(){
+  logout(event){
+    event.preventDefault();
+
     let { dispatch, onLogout } = this.props;
     dispatch(act(auth.logout)());
     if (onLogout) {
