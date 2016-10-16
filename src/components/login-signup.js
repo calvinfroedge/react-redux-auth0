@@ -26,6 +26,8 @@ class LoginSignup extends React.Component {
             return;
           }
 
+          const method = this.props.signup ? 'signUp' : 'login';
+          this.finish(method, err, profile, authResult.idToken);
           if (this.props.onAuthenticated) {
             this.props.onAuthenticated(authResult, profile);
           }
@@ -54,7 +56,7 @@ class LoginSignup extends React.Component {
     let obj;
     let newUser = false;
 
-    if(method == 'signin'){ //These both do the same thing now, but that may not be the case later
+    if(method == 'login'){ //These both do the same thing now, but that may not be the case later
       action = act(auth.signin);
     } else if(method == 'signup'){
       action = act(auth.signin);
