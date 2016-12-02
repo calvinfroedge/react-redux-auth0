@@ -47,8 +47,11 @@ const { LoginSignup } = AuthComponents;
 <LoginSignup login />
 
 <LoginSignup signup />
-
 ```
+
+## Options
+
+`auth0` passed when instantiating lock.
 
 ## Logout
 

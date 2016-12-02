@@ -14,25 +14,35 @@ class LoginSignup extends React.Component {
     this.lock.hide();
   }
 
-  componentDidMount(){
+  mountAuth0(options={}){
     try {
-      this.lock = new Auth0Lock(process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID', process.env.AUTH0_DOMAIN, 'Set process.env.AUTH0_DOMAIN');
+      this.lock = new Auth0Lock(
+        process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID', 
+        process.env.AUTH0_DOMAIN || 'Set process.env.AUTH0_DOMAIN', 
+        Object.assign({}, options, this.props.auth0)
+      );
+      return this.lock;
     } catch(e){
       console.log('auth0 mount error', e);
     }
   }
 
-  show(event, fn, cb){
+  componentWillUnmount(){
+    this.lock = null;
+  }
+
+  show(event, opts, cb){
     event.preventDefault();
-    this.lock[fn](cb);
+    let auth0 = this.mountAuth0(opts);
+    auth0.show(cb);
   }
 
   showLoginModal(event){
-    this.show(event, 'showSignin', this.finish.bind(this, 'signin'));
+    this.show(event, {initialScreen: 'login'}, this.finish.bind(this, 'signin'));
   }
 
   showSignupModal(event){
-    this.show(event, 'showSignup', this.finish.bind(this, 'signup'));
+    this.show(event, {initialScreen: 'signUp'}, this.finish.bind(this, 'signup'));
   }
 
   finish(method, err, profile, token){

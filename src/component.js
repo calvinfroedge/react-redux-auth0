@@ -15,7 +15,10 @@ class BaseComponent extends React.Component {
     let { auth } = this.props;
 
     return <div>
+      Login:
       {!auth.token && <LoginSignup login />}
+      Signup:
+      {!auth.token && <LoginSignup signup />}
       {auth.token &&  <Logout />}
     </div>
   }
