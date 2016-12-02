@@ -1,7 +1,7 @@
 # Use Auth0 with React + Redux
 
 ```
-import { AuthComponents, AuthMiddleware, AuthReducer } from 'react-redux-auth0'
+import { AuthComponents, AuthMiddlewares, AuthReducer } from 'react-redux-auth0'
 ```
 
 ### When starting your app, include the following environment variables:
