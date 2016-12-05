@@ -21,9 +21,37 @@ class LoginSignup extends React.Component {
         process.env.AUTH0_DOMAIN || 'Set process.env.AUTH0_DOMAIN', 
         Object.assign({}, options, this.props.auth0)
       );
+
+      this.lock.on('authenticated', (authResult) => {
+        this.lock.getProfile(authResult.idToken, (error, profile) => {
+          if (error) {
+            // Handle error
+            console.error(error);
+            return;
+          }
+
+          const method = this.props.signup ? 'signup' : 'login';
+          this.finish(method, error, profile, authResult.idToken);
+          if (this.props.onAuthenticated) {
+            this.props.onAuthenticated(authResult, profile);
+          }
+        });
+      });
+
       return this.lock;
     } catch(e){
       console.log('auth0 mount error', e);
+    }
+  }
+
+  componentDidMount(){
+    const { props } = this;
+
+    let auth0 = props.auth0 || {};
+    let auth = auth0.auth || {};
+
+    if(auth.redirect){ //Because redirect restarts browser memory, auth0 needs to be mounted again in redirect mode for on.authenticated callback handler to be reached
+      this.mountAuth0();
     }
   }
 
@@ -38,11 +66,11 @@ class LoginSignup extends React.Component {
   }
 
   showLoginModal(event){
-    this.show(event, {initialScreen: 'login'}, this.finish.bind(this, 'signin'));
+    this.show(event, {initialScreen: 'login'});
   }
 
   showSignupModal(event){
-    this.show(event, {initialScreen: 'signUp'}, this.finish.bind(this, 'signup'));
+    this.show(event, {initialScreen: 'signUp'});
   }
 
   finish(method, err, profile, token){
@@ -51,7 +79,7 @@ class LoginSignup extends React.Component {
     let obj;
     let newUser = false;
 
-    if(method == 'signin'){ //These both do the same thing now, but that may not be the case later
+    if(method == 'login'){ //These both do the same thing now, but that may not be the case later
       action = act(auth.signin);
     } else if(method == 'signup'){
       action = act(auth.signin);
@@ -87,6 +115,21 @@ class LoginSignup extends React.Component {
     );
   }
 }
+
+/*
+ * Make redirect "false" 
+ */
+LoginSignup.defaultProps = {
+  auth0: {
+    auth: {
+      redirect: true
+    }
+  }
+}
+
+LoginSignup.propTypes = {
+  onAuthenticated: React.PropTypes.func
+};
 
 export default connect((state)=>{
   let { auth } = state;

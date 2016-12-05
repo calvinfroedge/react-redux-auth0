@@ -13,6 +13,7 @@ class BaseComponent extends React.Component {
 
   render(){
     let { auth } = this.props;
+    console.log('auth is', auth);
 
     return <div>
       Login:
