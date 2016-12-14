@@ -1,4 +1,4 @@
-export AuthExample from './component'
+export AuthExample from './demo'
 export AuthReducer from './reducers/auth'
 export * as AuthMiddlewares from './middlewares'
-export * as AuthComponents from './components'
+export AuthComponent from './component'

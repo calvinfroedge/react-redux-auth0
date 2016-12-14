@@ -1,7 +1,7 @@
 # Use Auth0 with React + Redux
 
 ```
-import { AuthComponents, AuthMiddlewares, AuthReducer } from 'react-redux-auth0'
+import { AuthComponent, AuthMiddlewares, AuthReducer } from 'react-redux-auth0'
 ```
 
 ### When starting your app, include the following environment variables:
@@ -13,7 +13,7 @@ AUTH0_CLIENTID=client-id-string AUTH0_DOMAIN=domain npm your-start-command
 Include [Auth0](https://auth0.com/) from CDN in your template (believe me, you don't want to build it):
 
 ```
-<script src="http://cdn.auth0.com/js/lock-9.0.min.js"></script>
+<script src="//cdn.auth0.com/js/lock/10.6/lock.min.js"></script>
 ```
 
 Make sure you have this webpack plugin so that webpack will compile in proper environment variables:
@@ -34,35 +34,31 @@ const AUTH0_CLIENTID = process.env.AUTH0_CLIENTID;
 const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
 ```
 
-# AuthComponents
-
-## LoginSignup
+# AuthComponent
 
 Can be used to render either a 'Sigup' or 'Login' button:
 
 
 ```
-const { LoginSignup } = AuthComponents;
 
-<LoginSignup login />
+<AuthComponent login />
 
-<LoginSignup signup />
+<AuthComponent signup />
 ```
+
+...or will render both:
+
+```
+<AuthComponent onAuthenticated={callback} />
+```
+
+The component will automatically return a `Logout` button when the user is authenticated.
 
 ## Options
 
-`auth0` passed when instantiating lock.
+`auth0`: auth0 lock customization options detailed here https://auth0.com/docs/libraries/lock/v10/customization
+`onAuthenticated (token, profile)`: A callback to receive when authentication has completed. 
 
-## Logout
-
-A simple logout link.
-
-```
-const { Logout } = AuthComponents;
-
-<Logout />
-
-```
 
 # Examples
 
