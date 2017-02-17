@@ -11,7 +11,7 @@ class BaseComponent extends React.Component {
   }
 
   onAuthenticated(token, profile){ //if loginResult is null, it's likely because a token was already set
-    console.log(`Login token ${token}, profile ${JSON.stringify(profile)}`);
+    console.log(`Login token ${JSON.stringify(token)},\n\nProfile\n ${JSON.stringify(profile)}`);
   }
 
   render(){
