@@ -23,7 +23,7 @@ class AuthComponent extends React.Component {
       );
 
       this.lock.on('authenticated', (authResult) => {
-        this.lock.getProfile(authResult.idToken, (error, profile) => {
+        this.lock.getUserInfo(authResult.accessToken, (error, profile) => {
           if (error) {
             // Handle error
             console.error(error);
@@ -31,7 +31,7 @@ class AuthComponent extends React.Component {
           }
 
           const method = this.props.signup ? 'signup' : 'login';
-          this.finish(method, error, profile, authResult.idToken);
+          this.finish(method, error, profile, authResult);
         });
       });
 
