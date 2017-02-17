@@ -3,9 +3,9 @@ import { auth } from '../constants'
 
 let fn = (obj={})=>{
   return Object.assign({}, {
-    profile: '',
-    token: '',
-    id: '',
+    profile: null,
+    token: null,
+    id: null,
     submitting: false,
     error: false,
     newUser: false
