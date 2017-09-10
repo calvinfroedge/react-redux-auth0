@@ -5,8 +5,8 @@ var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const env = process.env.NODE_ENV;
-const AUTH0_CLIENTID = process.env.AUTH0_CLIENTID;
-const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
+const REACT_APP_AUTH0_CLIENTID = process.env.REACT_APP_AUTH0_CLIENTID;
+const REACT_APP_AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
 
 var config = {
   module: {
@@ -21,8 +21,8 @@ var config = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
-      'process.env.AUTH0_CLIENTID': JSON.stringify(AUTH0_CLIENTID),
-      'process.env.AUTH0_DOMAIN': JSON.stringify(AUTH0_DOMAIN)
+      'process.env.REACT_APP_AUTH0_CLIENTID': JSON.stringify(REACT_APP_AUTH0_CLIENTID),
+      'process.env.REACT_APP_AUTH0_DOMAIN': JSON.stringify(REACT_APP_AUTH0_DOMAIN)
     })
   ]
 };

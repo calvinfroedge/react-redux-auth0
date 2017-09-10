@@ -17,8 +17,8 @@ class AuthComponent extends React.Component {
   mountAuth0(options={}){
     try {
       this.lock = new Auth0Lock(
-        process.env.AUTH0_CLIENTID || 'Set process.env.AUTH0_CLIENTID', 
-        process.env.AUTH0_DOMAIN || 'Set process.env.AUTH0_DOMAIN', 
+        process.env.REACT_APP_AUTH0_CLIENTID || 'Set process.env.REACT_APP_AUTH0_CLIENTID', 
+        process.env.REACT_APP_AUTH0_DOMAIN || 'Set process.env.REACT_APP_AUTH0_DOMAIN', 
         Object.assign({}, options, this.props.auth0)
       );
 
