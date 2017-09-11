@@ -15,9 +15,9 @@ Include [Auth0](https://auth0.com/) from CDN in your template (believe me, you d
 ```
 <script src="//cdn.auth0.com/js/lock/10.11/lock.min.js"></script>
 
-# Usage with Webpack
-
 ```
+
+### Usage with Webpack
 
 Make sure you have this webpack plugin so that webpack will compile in proper environment variables:
 
