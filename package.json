@@ -38,6 +38,7 @@
     "cacheable": "^0.2.9",
     "html-webpack-plugin": "^2.16.0",
     "namespaced-constants": "0.0.1",
+    "prop-types": "^15.5.10",
     "redux-modifiers": "0.0.5",
     "webpack-hot-middleware": "^2.10.0"
   },

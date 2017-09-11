@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { auth } from './constants'
 import { createAction as act } from 'redux-actions'
 import { connect } from 'react-redux'
@@ -159,7 +160,7 @@ AuthComponent.defaultProps = {
 }
 
 AuthComponent.propTypes = {
-  onAuthenticated: React.PropTypes.func
+  onAuthenticated: PropTypes.func
 };
 
 export default connect((state)=>{
