@@ -7,7 +7,7 @@ import { AuthComponent, AuthMiddlewares, AuthReducer } from 'react-redux-auth0'
 ### When starting your app, include the following environment variables:
 
 ```
-REACT_APP_AUTH0_CLIENTID=client-id-string REACT_APP_AUTH0_DOMAIN=domain npm your-start-command
+AUTH0_CLIENTID=client-id-string AUTH0_DOMAIN=domain npm your-start-command
 ```
 
 Include [Auth0](https://auth0.com/) from CDN in your template (believe me, you don't want to build it):
@@ -24,8 +24,8 @@ Make sure you have this webpack plugin so that webpack will compile in proper en
 ```
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': JSON.stringify(env),
-    'process.env.REACT_APP_AUTH0_CLIENTID': JSON.stringify(REACT_APP_AUTH0_CLIENTID),
-    'process.env.REACT_APP_AUTH0_DOMAIN': JSON.stringify(REACT_APP_AUTH0_DOMAIN)
+    'process.env.AUTH0_CLIENTID': JSON.stringify(AUTH0_CLIENTID),
+    'process.env.AUTH0_DOMAIN': JSON.stringify(AUTH0_DOMAIN)
   })
 ```
 
@@ -33,9 +33,18 @@ Make sure you have this webpack plugin so that webpack will compile in proper en
 
 ```
 const env = process.env.NODE_ENV;
-const REACT_APP_AUTH0_CLIENTID = process.env.REACT_APP_AUTH0_CLIENTID;
-const REACT_APP_AUTH0_DOMAIN = process.env.REACT_APP_AUTH0_DOMAIN;
+const AUTH0_CLIENTID = process.env.AUTH0_CLIENTID;
+const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
 ```
+
+# Usage with CreateReactApp
+
+CreateReactApp has own webpack setup that is not easy to override, but it supports
+passing environment variables starting with `REACT_APP_` to application code.
+
+To make things easier for developers using CreateReactApp, we support
+`REACT_APP_AUTH0_CLIENTID` and `REACT_APP_AUTH0_DOMAIN` environment variables.
+If you need more information, please see [CreateReactApp readme, custom env variables](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-custom-environment-variables).
 
 # AuthComponent
 
@@ -60,4 +69,7 @@ The component will automatically return a `Logout` button when the user is authe
 ## Options
 
 `auth0`: auth0 lock customization options detailed here https://auth0.com/docs/libraries/lock/v10/customization
-`onAuthenticated (token, profile)`: A callback to receive when authentication has completed. 
+`onAuthenticated (token, profile)`: A callback to receive when authentication has completed.
+`credentials`: Optional object that contains `clientId` and `domain` properties.
+  You can use it if you have custom configuration setup not based on env variables, or if you
+  want to override credentials for just one component instance.

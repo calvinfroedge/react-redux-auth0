@@ -16,9 +16,16 @@ class AuthComponent extends React.Component {
 
   mountAuth0(options={}){
     try {
+      const { credentials } = this.props;
+      const { clientId, domain } = credentials;
+
+      if (!(clientId && domain)) {
+        throw('set process.env.AUTH0_CLIENTID and process.env.AUTH0_DOMAIN, ' +
+          'or pass `credentials` property to component.');
+      }
+
       this.lock = new Auth0Lock(
-        process.env.REACT_APP_AUTH0_CLIENTID || 'Set process.env.REACT_APP_AUTH0_CLIENTID', 
-        process.env.REACT_APP_AUTH0_DOMAIN || 'Set process.env.REACT_APP_AUTH0_DOMAIN', 
+        clientId, domain,
         Object.assign({}, options, this.props.auth0)
       );
 
@@ -137,13 +144,17 @@ class AuthComponent extends React.Component {
 }
 
 /*
- * Make redirect "false" 
+ * Make redirect "false"
  */
 AuthComponent.defaultProps = {
   auth0: {
     auth: {
       redirect: true
     }
+  },
+  credentials: {
+    clientId: process.env.AUTH0_CLIENTID || process.env.REACT_APP_AUTH0_CLIENTID,
+    domain: process.env.AUTH0_DOMAIN || process.env.REACT_APP_AUTH0_DOMAIN
   }
 }
 
